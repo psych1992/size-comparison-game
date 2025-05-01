@@ -1,0 +1,368 @@
+body {
+  display: flex;
+  margin: 0;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #ede6e3;
+  outline: none;
+}
+
+.welcomePage {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  gap: 0.5rem;
+  border-style: solid;
+  outline: none;
+}
+
+h1 {
+  font-size: 2rem;
+  font-family: "Fredoka", sans-serif;
+  margin-bottom: 0;
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+}
+
+#explanation {
+  font-size: 0.8rem;
+  color: rgb(52, 55, 53);
+  cursor: pointer;
+  font-family: "Roboto Mono", monospace;
+}
+
+#openExplanation-popup {
+  text-decoration: underline;
+}
+
+#start-button {
+  font-family: "Roboto Mono", monospace;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgb(52, 55, 53);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.2s ease-in-out;
+  border: none;
+  border-radius: 5px;
+}
+
+#start-button:hover {
+  background-color: #e26d73;
+  transform: scale(1.1);
+}
+
+#start-button:active {
+  transform: scale(1);
+  background-color: #388e3c;
+}
+
+#levelSelection-button {
+  font-family: "Roboto Mono", monospace;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgb(52, 55, 53);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.2s ease-in-out;
+  border: none;
+  border-radius: 5px;
+}
+
+#levelSelection-button:hover {
+  background-color: #e26d73;
+  transform: scale(1.1);
+}
+
+#levelSelection-button:active {
+  transform: scale(1);
+  background-color: #388e3c;
+}
+
+#explanation-popup {
+  position: fixed;
+  border-style: solid;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  padding: 1.5rem;
+  max-width: 95%;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+#explanation-popup h2 {
+  font-family: "Fredoka", sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  color: rgb(52, 55, 53);
+}
+
+#explanation-popup p {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  color: rgb(52, 55, 53);
+  line-height: 1.5;
+}
+#explanation-popup p strong {
+  color: rgb(52, 55, 53);
+}
+
+#close-popupButton {
+  font-family: "Roboto Mono", monospace;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgb(52, 55, 53);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+#explanation-popup button:hover {
+  background-color: #e26d73;
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Level Selection */
+#levelSelection {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  gap: 0.5rem;
+  border-style: solid;
+  outline: none;
+  margin: 0 auto;
+}
+#levelSelection h2 {
+  font-size: 2rem;
+  font-family: "Fredoka", sans-serif;
+  margin-bottom: 1rem;
+  color: rgb(52, 55, 53);
+}
+.level-grid {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.level-1,
+.level-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border: 2px solid rgb(52, 55, 53);
+  padding: 1.5rem;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 200px; /* Minimum width for better touch targets */
+  flex: 1; /* Allow equal distribution of space */
+}
+
+.level-1:hover,
+.level-2:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+}
+
+.level-1,
+.level-2,
+.level-1 p,
+.level-2 p {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  color: rgb(52, 55, 53);
+  line-height: 1.5;
+  text-align: center;
+}
+
+#backToWelcome-button {
+  font-family: "Roboto Mono", monospace;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgb(52, 55, 53);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.2s ease-in-out;
+  border: none;
+  border-radius: 5px;
+}
+
+#backToWelcome-button:hover {
+  background-color: #e26d73;
+  transform: scale(1.1);
+}
+
+#backToWelcome-button:active {
+  transform: scale(1);
+  background-color: #388e3c;
+}
+
+/* GamePlay */
+#container {
+  padding: 1rem;
+  max-width: 1200px; /* Prevents over-stretching on large screens */
+  margin: 0 auto; /* Centers container */
+}
+
+#questionLvl1 {
+  text-align: center;
+  font: 700 3rem "Fredoka", sans-serif;
+  color: rgb(52, 55, 53);
+  margin-bottom: 4rem;
+  width: 100%;
+  line-height: 1.2;
+  min-height: clamp(24px, 5vh, 50px);
+}
+
+#firstLevel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.image-row1 {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: end;
+  width: 100%;
+  gap: 3rem;
+  min-height: min(30vw, 200px);
+  justify-content: space-around;
+}
+
+.gameImagesLvl1 {
+  width: clamp(100px, 30vw, 200px);
+  object-fit: contain;
+  height: auto;
+  cursor: pointer;
+  object-position: bottom;
+  border: none;
+  transition: transform 0.3s ease, filter 0.2s ease;
+}
+
+.animationHover {
+  transition: transform 0.4s cubic-bezier(0.22, 1.61, 0.36, 1), filter 0.2s ease;
+  transform-origin: bottom center;
+}
+
+.animationHover:hover {
+  transform: var(--current-transform) translateY(-10px) !important;
+  filter: brightness(1.1);
+}
+
+.animationHover:active {
+  transform: var(--current-transform) translateY(0) !important;
+}
+
+/*FEEDBACK ANIMATION*/
+
+#feedback {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ede6e3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+#feedback.show {
+  opacity: 1;
+}
+
+.dancing-cows {
+  width: min(50vw, 300px);
+  animation: bounce 0.8s infinite alternate;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-20px);
+  }
+}
+
+/* Feedback overlay preventing layout shifts */
+.feedback-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ede6e3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font: 700 3rem "Fredoka", sans-serif;
+  color: rgb(52, 55, 53);
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animation for the feedback overlay */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

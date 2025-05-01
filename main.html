@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka:wght@300..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Perceptual-Comparision Game</title>
+  </head>
+  <body>
+    <div class="welcomePage" id="welcome">
+      <h1 class="title">Sense & Size</h1>
+      <p id="explanation">
+        A playful journey to build early number sensitivity...
+        <span id="openExplanation-popup">Learn more by clicking here</span>
+      </p>
+      <div id="explanation-popup" class="hidden">
+        <p>
+          This game helps young children (ages 3-6) develop an early
+          understanding of quantity. Rather than focusing directly on counting,
+          it seeks to build a strong foundation through visual differences such
+          as size, color intensity, and spacing.
+        </p>
+        <p>
+          <strong>Perceptual discrimination</strong>—a key early skill in the
+          development of numerical cognition—is the ability to notice and
+          compare differences between objects. Through playful practice, this
+          game helps children strengthen that ability.
+        </p>
+
+        <p>
+          The approach is inspired by the <em>Signal Clarity Hypothesis</em>,
+          which suggests that children learn about numbers more effectively when
+          the differences are perceptually clear, rather than relying on
+          abstract symbols. By emphasizing continuous magnitudes (like
+          cumulative area, density, and contrast), the game supports the natural
+          developmental pathway from intuitive quantity perception to more
+          formal numerical understanding.
+        </p>
+        <button id="close-popupButton">Got it!</button>
+      </div>
+      <button id="start-button">Start Game</button>
+      <button id="levelSelection-button">Select Level</button>
+    </div>
+
+    <div id="levelSelection" class="hidden">
+      <h2>Choose Your Level</h2>
+      <div class="level-grid">
+        <div class="level-1" id="lvl1Button">
+          <h3>Level 1</h3>
+          <p>Simple Comparisons</p>
+        </div>
+        <div class="level-2" id="lvl2Button">
+          <h3>Level 2</h3>
+          <p>Complex Comparisons</p>
+        </div>
+      </div>
+      <button id="backToWelcome-button">Back</button>
+    </div>
+
+    <div id="container" class="hidden">
+      <div id="feedback" class="hidden">
+        <img
+          class="dancing-cows"
+          src="/images/cowsFeedback.png"
+          alt="Dancing cows"
+        />
+      </div>
+      <div id="firstLevel" class="hidden">
+        <h2 id="questionLvl1"></h2>
+        <div class="image-row1">
+          <img
+            id="ball1"
+            class="gameImagesLvl1 hidden"
+            src="/images/ball1.png"
+            alt="Beach ball 1"
+          />
+          <img
+            id="ball2"
+            class="gameImagesLvl1 hidden"
+            src="/images/ball2.png"
+            alt="Beach Ball 2"
+          />
+          <img
+            id="cow1"
+            class="gameImagesLvl1 hidden"
+            src="/images/cow1.png"
+            alt="cow 1"
+          />
+          <img
+            id="cow2"
+            class="gameImagesLvl1 hidden"
+            src="/images/cow2.png"
+            alt="cow 2"
+          />
+        </div>
+      </div>
+      <div id="secondLevel" class="hidden"></div>
+    </div>
+    <script src="menu.js"></script>
+    <script src="level1.js"></script>
+  </body>
+</html>
