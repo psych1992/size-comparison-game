@@ -1,3 +1,5 @@
+"use strict";
+
 // Game elements
 const imagesGame1 = document.querySelectorAll(".gameImagesLvl1");
 const ball1 = document.getElementById("ball1");
@@ -8,13 +10,15 @@ const questionLvl1 = document.getElementById("questionLvl1");
 const feedbackDisplay = document.getElementById("feedback");
 const firstLevel = document.getElementById("firstLevel");
 
+import endGame from "./menu.js";
+
 //Object with the properties of each task of level 1
 const levelData = [
   {
-    prompt: "Which is the biggest ball?",
+    prompt: "Which is the smallest ballon?",
     correctAnswer: "ball2",
-    ball1: { size: 1 },
-    ball2: { size: 1.2 },
+    ball1: { size: 1.2 },
+    ball2: { size: 1 },
     image1: "ball1",
     image2: "ball2",
   },
@@ -27,8 +31,8 @@ const levelData = [
     image2: "cow2",
   },
   {
-    prompt: "Which is the smallest ballon?",
-    correctAnswer: "ball2",
+    prompt: "Which is the biggest ball?",
+    correctAnswer: "ball1",
     ball1: { size: 1.2 },
     ball2: { size: 1 },
     image1: "ball1",
@@ -45,25 +49,18 @@ const levelData = [
   },
 ];
 
-let task = 0;
+//variables for index and question
+let indexTask = 0;
 let currentQuestion = "";
 
-//Load level 1 from the start
-function loadLevel1() {
-  task = 0;
-  currentQuestion = "";
-  loadTaskLvl1();
-}
-
-function loadTaskLvl1() {
+//Loads task with index
+function loadTasks() {
   // Check if all tasks are completed
-  if (task >= levelData.length) {
-    // Handle level completion
-    endGame(); // eventually: nextLevel()
-    return;
+  if (indexTask >= levelData.length) {
+    return endGame(); // eventually: nextLevel()
   }
 
-  let currentTask = levelData[task];
+  let currentTask = levelData[indexTask];
   currentQuestion = currentTask.prompt;
   questionLvl1.textContent = currentQuestion;
 
@@ -71,18 +68,24 @@ function loadTaskLvl1() {
   imagesGame1.forEach((image) => {
     image.classList.add("hidden");
     image.classList.remove("animationHover");
-  });
 
-  // Setup images for current task
-  imagesGame1.forEach((image) => {
+    //Remove any existing click listener if it exists
+    if (image.clickListener) {
+      image.removeEventListener("click", image.clickListener);
+      image.clickListener = null;
+    }
+
     const imageId = image.id;
     const imageData = currentTask[imageId];
 
+    // Setup images for current task
     if (imageId === currentTask.image1 || imageId === currentTask.image2) {
       //Visibility and hover
       image.classList.remove("hidden");
       image.classList.add("animationHover");
-      image.addEventListener("click", () => checkAnswer(imageId, currentTask));
+
+      image.clickListener = () => checkAnswer(imageId);
+      image.addEventListener("click", image.clickListener);
 
       //Array preparing the rules for modifying the images with short-circuiting &&
       const imgTransforms = [
@@ -103,13 +106,13 @@ function loadTaskLvl1() {
   });
 }
 
-function checkAnswer(imageId, currentTask) {
-  if (imageId === currentTask.correctAnswer) {
+function checkAnswer(imageId) {
+  if (imageId === levelData[indexTask].correctAnswer) {
     console.log(imageId, " is the right answer");
     rightAnswer();
   } else {
     console.log(imageId, " is the wrong answer");
-    wrongAnswer(imageId, currentTask);
+    wrongAnswer(imageId);
   }
 }
 
@@ -131,7 +134,7 @@ function rightAnswer() {
   }, 2000);
 }
 
-function wrongAnswer(imageId, currentTask) {
+function wrongAnswer(imageId) {
   // Create fixed-position feedback overlay (thus avoiding layout shifts)
   const overlay = document.createElement("div");
   overlay.classList.add("feedback-overlay");
@@ -148,7 +151,14 @@ function wrongAnswer(imageId, currentTask) {
 }
 
 function loadNextTask() {
-  task++;
+  indexTask++;
   currentQuestion = "";
-  loadTaskLvl1();
+  loadTasks();
+}
+
+//Load level 1 from the start
+export default function loadLevel1() {
+  indexTask = 0;
+  currentQuestion = "";
+  loadTasks();
 }

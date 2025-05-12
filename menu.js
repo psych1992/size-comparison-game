@@ -1,3 +1,4 @@
+"use strict";
 //UI Elements
 const openExplanationPopup = document.getElementById("openExplanation-popup");
 const explanationPopup = document.getElementById("explanation-popup");
@@ -10,8 +11,11 @@ const backMenuButton = document.getElementById("backToWelcome-button");
 const buttonLoadLvl1 = document.getElementById("lvl1Button");
 const buttonLoadLvl2 = document.getElementById("lvl2Button");
 const boardGame = document.getElementById("container");
+const firstLevel = document.getElementById("firstLevel");
 
-function endGame() {
+import loadLevel1 from "./level1.js";
+
+export default function endGame() {
   boardGame.classList.add("hidden");
   firstLevel.classList.add("hidden");
   welcomePage.classList.remove("hidden");
@@ -34,7 +38,6 @@ function startNewGame() {
   boardGame.classList.remove("hidden");
   levelSelectionDisplay.classList.add("hidden");
   firstLevel.classList.remove("hidden");
-
   loadLevel1();
 }
 

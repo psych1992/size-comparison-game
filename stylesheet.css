@@ -265,6 +265,7 @@ h1 {
   gap: 3rem;
   min-height: min(30vw, 200px);
   justify-content: space-around;
+  box-shadow: 0 7px 2px -3px rgba(0, 0, 0, 0.5);
 }
 
 .gameImagesLvl1 {
